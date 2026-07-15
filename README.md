@@ -1,12 +1,13 @@
 # M5StickCPlus Stability Tracker
 
-This project turns an M5StickCPlus into a  stability training aid. It continuously monitors your hold stability using the built-in IMU and listens for the mechanical "snap" of a dry fire using the built-in microphone. When a shot is detected, it grades how steady you were in the **2 seconds immediately preceding the shot**, actively ignoring the recoil/movement of the trigger break itself.
+This project turns an M5StickCPlus into a  stability training aid. It continuously monitors your hold stability using the built-in IMU and listens for the mechanical  noises using the built-in microphone. When a snap is detected, it grades how steady you were in the **2 seconds immediately preceding the snap**, actively ignoring the  movement of the trigger-event  itself.
 
 ## Key Features
 
 * **Pre-Shot Circular Buffer:** Constantly records the last 2 seconds of accelerometer data at 50Hz.
-* **Ready Chirp:** Emits a tiny 50ms beep once you've held the device perfectly still for a full 2 seconds, letting you know you are cleared to break the shot.
-* **Recoil Exclusion (Look-back):** Automatically discards the last ~140ms of movement data *right at* the moment of the shot so the physical trigger break doesn't ruin your hold score.
+* **Ready Chirp:** Emits a tiny 50ms beep once you've held the device perfectly still for a full 2 seconds, letting you know you are cleared to go.
+* **Recoil Exclusion (Look-back):** Automatically discards the last ~140ms of movement data *right at* the moment of the snap so the physical trigger break doesn't ruin your hold score.
+* 
 * **Drift Diagnosis:** Tells you your primary error direction (e.g., "Left Tilt", "Vertical Shake").
 * **Visual Plotting:** Graphs your X, Y, and Z axis micromovements on-screen after a shot.
 
@@ -38,8 +39,8 @@ If the device is triggering too easily, scoring too harshly, or missing shots, y
 ### 2. Recoil Exclusion (The "Pollution Offset")
 
 * `POLLUTION_OFFSET = 7;`
-  * **What it does:** The number of samples to delete right at the moment the trigger is pulled. At 50Hz, 7 samples = 140 milliseconds.
-  * **Adjust:** If your score is always 0% because your trigger has a very heavy, slow break that shakes the gun *before* it clicks, increase this to `10` (200ms). If you want strict grading right up to the exact millisecond of the click, lower it to `2` or `3`.
+  * **What it does:** The number of samples to delete right at the moment the device is triggered. . At 50Hz, 7 samples = 140 milliseconds.
+  * **Adjust:** If your score is always 0% because  it clicks, increase this to `10` (200ms). If you want strict grading right up to the exact millisecond of the click, lower it to `2` or `3`.
 
 ### 3. Buffer Window & Beep Timing
 
